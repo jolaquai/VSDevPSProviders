@@ -1,0 +1,57 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <RollForward>LatestMajor</RollForward>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+
+    <AnalysisMode>recommended</AnalysisMode>
+    <AnalysisModePerformance>all</AnalysisModePerformance>
+    <AnalysisModeReliability>all</AnalysisModeReliability>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <_Pwsh7Path>C:\Program Files\PowerShell\7\pwsh.exe</_Pwsh7Path>
+    <_Pwsh7PreviewPath>C:\Program Files\PowerShell\7-preview\pwsh.exe</_Pwsh7PreviewPath>
+    <_Pwsh7Path Condition="!Exists('$(_Pwsh7Path)')">$(LocalAppData)\Microsoft\WindowsApps\pwsh.exe</_Pwsh7Path>
+    <_Pwsh7PreviewPath Condition="!Exists('$(_Pwsh7PreviewPath)')">$(LocalAppData)\Microsoft\WindowsApps\pwsh-preview.exe</_Pwsh7PreviewPath>
+    <_WindowsPsPath>$(WinDir)\System32\WindowsPowerShell\v1.0\powershell.exe</_WindowsPsPath>
+
+    <!-- last match wins: preview > stable > Windows PowerShell (reorder to taste) -->
+    <_PwshPath Condition="Exists('$(_Pwsh7Path)')">$(_Pwsh7Path)</_PwshPath>
+    <_PwshPath Condition="Exists('$(_Pwsh7PreviewPath)')">$(_Pwsh7PreviewPath)</_PwshPath>
+    <_PwshPath Condition="Exists('$(_Pwsh7WindowsAppsPath)')">$(_Pwsh7WindowsAppsPath)</_PwshPath>
+    <_PwshPath Condition="Exists('$(_Pwsh7PreviewWindowsAppsPath)')">$(_Pwsh7PreviewWindowsAppsPath)</_PwshPath>
+    <_PwshPath Condition="'$(_PwshPath)' == ''">$(_WindowsPsPath)</_PwshPath>
+
+    <_LaunchArgs>-NoExit -NoProfile -ExecutionPolicy Bypass -Command ". '$(MSBuildProjectDirectory)\launch-script.ps1' -AssemblyName '$(AssemblyName)'"</_LaunchArgs>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Management.Automation" Version="7.6.3" />
+    <PackageReference Include="envdte" Version="17.14.40260" />
+    <PackageReference Include="envdte80" Version="17.14.40260" />
+
+    <Using Include="VSDevPSProviders.Interop" />
+
+    <Using Include="System.Collections.Frozen" />
+    <Using Include="System.Collections.Generic" />
+    <Using Include="System.Collections.Immutable" />
+    <Using Include="System.Collections.Specialized" />
+    <Using Include="System.Text" />
+    <Using Include="System.Text.Json" />
+    <Using Include="System.Text.Json.Serialization" />
+    <Using Include="System.Runtime.CompilerServices" />
+    <Using Include="System.Runtime.InteropServices" />
+    <Using Include="System.Runtime.InteropServices.Marshalling" />
+
+    <Using Include="System.Management" />
+    <Using Include="System.Management.Automation" />
+    <Using Include="System.Management.Automation.Provider" />
+
+    <Using Include="EnvDTE80" />
+  </ItemGroup>
+
+</Project>

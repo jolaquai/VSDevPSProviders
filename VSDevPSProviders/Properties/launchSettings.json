@@ -1,0 +1,28 @@
+{
+    "profiles": {
+        "VSDevPSProviders (preferred)": {
+            "commandName": "Executable",
+            "executablePath": "$(_PwshPath)",
+            "commandLineArgs": "$(_LaunchArgs)",
+            "workingDirectory": "$(OutputPath)\\"
+        },
+        "VSDevPSProviders (pwsh)": {
+            "commandName": "Executable",
+            "executablePath": "$(_Pwsh7Path)",
+            "commandLineArgs": "$(_LaunchArgs)",
+            "workingDirectory": "$(OutputPath)\\"
+        },
+        "VSDevPSProviders (pwsh-preview)": {
+            "commandName": "Executable",
+            "executablePath": "$(_Pwsh7PreviewPath)",
+            "commandLineArgs": "$(_LaunchArgs)",
+            "workingDirectory": "$(OutputPath)\\"
+        },
+        "VSDevPSProviders (WPS)": {
+            "commandName": "Executable",
+            "executablePath": "$(_WindowsPsPath)",
+            "commandLineArgs": "$(_LaunchArgs)",
+            "workingDirectory": "$(OutputPath)\\"
+        }
+    }
+}
